@@ -1,0 +1,66 @@
+import requests
+
+url = "https://petstore.swagger.io/v2/pet/"
+
+def myJSON(id, namePet, nameCategory):
+	myjson = {
+  				"id": id,
+  				"category": {
+    				"id": 0,
+			    	"name": nameCategory
+			  	},
+			  	"name": namePet,
+			  	"photoUrls": [
+			    	"string"
+			  	],
+			  	"tags": [
+			    {
+			      "id": 0,
+			      "name": "string"
+			    }
+			  	],
+			  	"status": "available"
+			}
+	return myjson
+
+def getById(id):
+	r = requests.get(url + str(id))
+	print("Status code: ", r.status_code)
+	print(r.json())
+
+def add(id, namePet, nameCategory):
+	r = requests.post(url, json=myJSON(id, namePet, nameCategory))
+	print("Status code: ", r.status_code)
+	print(r.json())
+
+def update(id, namePet, nameCategory):
+	r = requests.put(url, json=myJSON(id, namePet, nameCategory))
+
+def delete(id):
+	r = requests.delete(url + str(id))
+	print("Status code: ", r.status_code)
+	print(r.json())
+
+getById(1)
+add(344, 'Mark', 'dog')
+getById(344)
+update(344, 'Sobaken', 'dog')
+getById(344)
+delete(344)
+getById(344)
+
+"""
+print("Enter command: add - add a pet")
+c = input("ва")
+
+
+
+def option(argument):
+	switcher = {
+		'add': add(1, "asdasd"),
+		'get': print("Input ID to get pet:"),
+	}
+	return switcher.get(argument, "NO")
+
+option(c)
+"""
